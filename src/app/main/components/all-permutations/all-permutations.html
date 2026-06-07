@@ -1,0 +1,35 @@
+<div class="all-container">
+  <div class="header">
+    <button class="back-btn" (click)="onBack()">← חזור</button>
+    <h2>כל הקומבינציות</h2>
+  </div>
+  @if (permService.loading()) {
+    <div class="loading"><span>טוען קומבינציות...</span></div>
+  }
+  @if (permService.errorMsg()) {
+    <p class="error">{{ permService.errorMsg() }}</p>
+  }
+  @if (!permService.loading() && permutations().length === 0) {
+    <div class="empty-state">
+      <p>כל הקומבינציות האפשריות כבר הוצגו!</p>
+    </div>
+  }
+  @if (!permService.loading() && permutations().length > 0) {
+    <div class="permutations-list">
+      @for (perm of permutations(); track perm.index) {
+        <div class="perm-row">
+          <span class="perm-index">{{ perm.index }}</span>
+          <div class="perm-values">
+            @for (num of perm.values; track num) {
+              <span class="box">{{ num }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    <app-pagination
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)" />
+  }
+</div>

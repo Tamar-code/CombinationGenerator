@@ -1,0 +1,35 @@
+<div class="navigator-container">
+  <h2>ניווט בקומבינציות</h2>
+  @if (permService.totalCount() !== '0') {
+    <div class="result">
+      <p>סה"כ קומבינציות עבור מספר {{ permService.inputNumber() }}:</p>
+      <strong>{{ permService.totalCountDisplay }}</strong>
+    </div>
+  }
+  @if (permService.currentPermutation().length === 0) {
+    <p class="hint">לחץ על "הבא" כדי לראות את הקומבינציה הראשונה</p>
+  }
+  @if (permService.currentPermutation().length > 0) {
+    <div class="permutation-display">
+      <span class="index">קומבינציה מספר {{ permService.currentIndex() }}:</span>
+      <div class="perm-boxes">
+        @for (num of permService.currentPermutation(); track num) {
+          <span class="box">{{ num }}</span>
+        }
+      </div>
+    </div>
+  }
+  <div class="buttons">
+    <button (click)="onNext()" [disabled]="!permService.hasMore() || permService.loading()">
+      {{ permService.loading() ? 'טוען...' : 'הבא ▶' }}
+    </button>
+    <button (click)="onShowAll()" [disabled]="permService.loading()">כל הקומבינציות</button>
+    <button (click)="onReset()" class="reset">איפוס ↺</button>
+  </div>
+  @if (!permService.hasMore()) {
+    <p class="done">הגעת לקומבינציה האחרונה!</p>
+  }
+  @if (permService.errorMsg()) {
+    <p class="error">{{ permService.errorMsg() }}</p>
+  }
+</div>

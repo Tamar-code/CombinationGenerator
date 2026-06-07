@@ -1,0 +1,11 @@
+<div class="pagination">
+  <button (click)="goFirst()" [disabled]="currentPage() === 1">⏮ ראשון</button>
+  <button (click)="goPrev()" [disabled]="currentPage() === 1">◀ הקודם</button>
+  <span class="page-info">עמוד {{ currentPage() }} מתוך {{ totalPages() }}</span>
+  <button (click)="goNext()" [disabled]="currentPage() === totalPages()">הבא ▶</button>
+  <button (click)="goLast()" [disabled]="currentPage() === totalPages()">אחרון ⏭</button>
+  <div class="jump">
+    <input type="number" [ngModel]="jumpToPage()" (ngModelChange)="jumpToPage.set($event)" min="1" [max]="totalPages()" />
+    <button (click)="goToPage()">עבור</button>
+  </div>
+</div>

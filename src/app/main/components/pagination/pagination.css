@@ -1,0 +1,6 @@
+.pagination { display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap; padding: 16px; }
+button { padding: 8px 14px; background: #3f51b5; color: white; border: none; border-radius: 6px; cursor: pointer; }
+button:disabled { background: #ccc; cursor: default; }
+.page-info { font-size: 0.95rem; }
+.jump { display: flex; gap: 6px; align-items: center; }
+.jump input { width: 60px; padding: 6px; border: 1px solid #ccc; border-radius: 6px; text-align: center; }

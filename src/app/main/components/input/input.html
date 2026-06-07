@@ -1,0 +1,22 @@
+<div class="input-container">
+  <h1>מחולל הקומבינציות</h1>
+  <div class="form-group">
+    <label for="nInput">הכנס ערך של n (1–20):</label>
+    <input id="nInput" type="number"
+      [value]="permService.inputNumber()"
+      (input)="permService.inputNumber.set(+$any($event.target).value)"
+      min="1" max="20" />
+    @if (permService.inputNumber() < 1) {
+      <p class="validation-error">המספר חייב להיות לפחות 1</p>
+    }
+    @if (permService.inputNumber() > 20) {
+      <p class="validation-error">המספר לא יכול להיות גדול מ-20</p>
+    }
+  </div>
+  <button (click)="onStart()" [disabled]="!isValid() || permService.loading()">
+    {{ permService.loading() ? 'טוען...' : 'התחל' }}
+  </button>
+  @if (permService.errorMsg()) {
+    <p class="error">{{ permService.errorMsg() }}</p>
+  }
+</div>
